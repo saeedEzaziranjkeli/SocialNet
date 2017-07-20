@@ -7,16 +7,88 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-
+    var ref: DatabaseReference!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self        // Override point for customization after application launch.
+        //_ = application.windows[0].rootViewController as! UINavigationController
+        //let _ : UIStoryboard
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        print("User signed into google")
+        
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        // ...
+        
+        Auth.auth().signIn(with: credential) { (user, error) in
+            print("User Signed Into Firebase")
+            
+            
+            self.ref = Database.database().reference()
+            
+            self.ref.child("user_profiles").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let snapshot = snapshot.value as? NSDictionary
+                
+                if(snapshot == nil)
+                {
+                    self.ref.child("user_profiles").child(user!.uid).child("name").setValue(user?.displayName)
+                    self.ref.child("user_profiles").child(user!.uid).child("email").setValue(user?.email)
+                    
+                    self.window = UIWindow(frame: UIScreen.main.bounds)
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
+
+                    self.window?.rootViewController = initialViewController
+                    self.window?.makeKeyAndVisible()
+                    
+                    //let newViewController = ProfileViewController()
+                    //self.navigationController?.pushViewController(newViewController, animated: true)
+//                    let storyboard = UIStoryboard(name: "MyStoryboardName", bundle: nil)
+//                    let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! ProfileViewController
+//                    self.presentViewController(vc, animated: true, completion: nil)
+//                    _.pushViewController(_.instantiateViewCo‌​ntroller(withIdentif‌​ier: "profileVC") as ProfileViewController, animated: true)
+                }
+                else{
+                    print("Moshkel dare")
+                }
+                
+               
+                
+            })
+            
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
