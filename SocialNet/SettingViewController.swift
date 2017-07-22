@@ -83,31 +83,16 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
         return indexPath.section == 0 ? 100 : 50
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        userProfileImage.layer.borderWidth = 3
-//        userProfileImage.layer.masksToBounds = false
-//        userProfileImage.layer.borderColor = UIColor.white.cgColor
-//        userProfileImage.layer.cornerRadius = userProfileImage.frame.height/2
-//        userProfileImage.clipsToBounds = true
-//        Auth.auth().addStateDidChangeListener{(auth,user) in
-//            if user != nil{
-//                let username = auth.currentUser?.displayName
-//                self.usernameLabel.text = username
-//                let photoURL = auth.currentUser?.photoURL
-//                let data = NSData(contentsOf: photoURL!)
-//                self.userProfileImage.image = UIImage(data: data! as Data)
-//            }
-//            else{
-//                print("User must Signin")
-//            }
-//        }
-
-        
+ 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let indexpath = tableView.indexPath(for: sender as! UITableViewCell)!
+        if indexpath.item == 0 && indexpath.section == 1 && identifier == "segueEditorViewController" {
+            return true
+        }
+        return false
     }
+    
 }
-
-
 class ProfilDetailCell:UITableViewCell{
 
     @IBOutlet weak var usernameLabel: UILabel!

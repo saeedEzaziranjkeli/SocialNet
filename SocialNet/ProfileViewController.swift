@@ -61,10 +61,12 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
             profileImageView.image = image;
+            self.dismiss(animated: true, completion: nil)
                 }
         else{
             print("Image has Problem")
         }
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
