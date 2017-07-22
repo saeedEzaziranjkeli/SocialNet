@@ -8,7 +8,21 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
+
 class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    var window:UIWindow?
+    @IBAction func signoutButton(_ sender: Any) {
+        GIDSignIn.sharedInstance().signOut()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+
+    }
 
     @IBAction func addPicture(_ sender: Any) {
         let imagePicker = UIImagePickerController()

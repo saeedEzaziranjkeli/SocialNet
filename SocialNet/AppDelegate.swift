@@ -23,13 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
-                
-                self.window?.rootViewController = initialViewController
-                self.window?.makeKeyAndVisible()
+//                self.window = UIWindow(frame: UIScreen.main.bounds)
+//                
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
+//                
+//                self.window?.rootViewController = initialViewController
+//                self.window?.makeKeyAndVisible()
             }
         }
         
@@ -78,15 +78,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
                     self.window?.rootViewController = initialViewController
                     self.window?.makeKeyAndVisible()
-                    
-                    //let newViewController = ProfileViewController()
-                    //self.navigationController?.pushViewController(newViewController, animated: true)
-//                    let storyboard = UIStoryboard(name: "MyStoryboardName", bundle: nil)
-//                    let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! ProfileViewController
-//                    self.presentViewController(vc, animated: true, completion: nil)
-//                    _.pushViewController(_.instantiateViewCo‌​ntroller(withIdentif‌​ier: "profileVC") as ProfileViewController, animated: true)
                 }
                 else{
+                    Auth.auth().addStateDidChangeListener{(auth,user) in
+                        if user != nil{
+                            self.window = UIWindow(frame: UIScreen.main.bounds)
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
+                            self.window?.rootViewController = initialViewController
+                            self.window?.makeKeyAndVisible()
+                        }
+                    }
                     print("Moshkel dare")
                 }
                 

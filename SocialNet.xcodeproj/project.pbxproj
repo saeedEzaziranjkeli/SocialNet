@@ -16,6 +16,8 @@
 		483BE06F1F1E853B0080A2C3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */; };
 		483BE0711F1E8E540080A2C3 /* MessageContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE0701F1E8E540080A2C3 /* MessageContoller.swift */; };
 		486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */; };
+		48C7713F1F23B5130064F108 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C7713E1F23B5130064F108 /* EditViewController.swift */; };
+		48FF95311F238924005536C9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF95301F238924005536C9 /* SettingViewController.swift */; };
 		52317E8CA7306E149186DBF1 /* Pods_SocialNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A65A8BC87CC8BCABEF670E8 /* Pods_SocialNet.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		483BE0701F1E8E540080A2C3 /* MessageContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContoller.swift; sourceTree = "<group>"; };
 		486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		48C7713E1F23B5130064F108 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		48FF95301F238924005536C9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		98E24DE621D83CAB3593E6BF /* Pods-SocialNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialNet.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialNet/Pods-SocialNet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +84,8 @@
 				4826255E1F1D334E006315E0 /* AppDelegate.swift */,
 				482625601F1D334E006315E0 /* ViewController.swift */,
 				482625621F1D334E006315E0 /* Main.storyboard */,
+				48FF95301F238924005536C9 /* SettingViewController.swift */,
+				48C7713E1F23B5130064F108 /* EditViewController.swift */,
 				483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */,
 				486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */,
 				483BE0701F1E8E540080A2C3 /* MessageContoller.swift */,
@@ -225,11 +231,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48FF95311F238924005536C9 /* SettingViewController.swift in Sources */,
 				483BE0711F1E8E540080A2C3 /* MessageContoller.swift in Sources */,
 				486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */,
 				483BE06F1F1E853B0080A2C3 /* ProfileViewController.swift in Sources */,
 				482625611F1D334E006315E0 /* ViewController.swift in Sources */,
 				4826255F1F1D334E006315E0 /* AppDelegate.swift in Sources */,
+				48C7713F1F23B5130064F108 /* EditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZwN-5X-b6V">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -106,7 +106,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SocialNet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="BYZ-38-t0r" customClass="ViewController" customModule="SocialNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -172,28 +172,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="F4g-9h-gL9">
-                                <rect key="frame" x="16" y="163" width="343" height="351"/>
+                                <rect key="frame" x="16" y="163" width="343" height="431"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvK-7X-Vfj">
+                                        <rect key="frame" x="114.5" y="0.0" width="114" height="30"/>
+                                        <state key="normal" title="Edit Your Picture">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPicture:" destination="p31-dl-JEd" eventType="touchUpInside" id="qnr-Ut-eoF"/>
+                                        </connections>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gJf-cc-yM6">
-                                        <rect key="frame" x="71.5" y="0.0" width="200" height="200"/>
+                                        <rect key="frame" x="71.5" y="80" width="200" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="LEa-Uf-EK7"/>
                                             <constraint firstAttribute="width" constant="200" id="yJI-0V-dBg"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIi-kE-vxo">
-                                        <rect key="frame" x="0.0" y="250" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="330" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvK-7X-Vfj">
-                                        <rect key="frame" x="131.5" y="320.5" width="80" height="30"/>
-                                        <state key="normal" title="Add Picture">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9r-bo-BTw">
+                                        <rect key="frame" x="145" y="400.5" width="53" height="30"/>
+                                        <state key="normal" title="Signout">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="addPicture:" destination="p31-dl-JEd" eventType="touchUpInside" id="qnr-Ut-eoF"/>
+                                            <action selector="signoutButton:" destination="p31-dl-JEd" eventType="touchUpInside" id="SVM-Eb-Hgx"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -242,7 +251,7 @@
         <!--Setting-->
         <scene sceneID="rDf-uX-0y8">
             <objects>
-                <viewController id="mHa-sy-Oce" sceneMemberID="viewController">
+                <viewController id="mHa-sy-Oce" customClass="SettingViewController" customModule="SocialNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="crt-gl-s3b"/>
                         <viewControllerLayoutGuide type="bottom" id="E1G-Em-dez"/>
@@ -250,13 +259,96 @@
                     <view key="view" contentMode="scaleToFill" id="9xs-t2-KGL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Setting" image="setting" selectedImage="selectedsetting" id="kdB-pl-KSd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y07-I2-boK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-174" y="582"/>
+            <point key="canvasLocation" x="-175.19999999999999" y="580.65967016491754"/>
+        </scene>
+        <!--Edit View Controller-->
+        <scene sceneID="pNB-WK-XPl">
+            <objects>
+                <viewController id="ZwN-5X-b6V" customClass="EditViewController" customModule="SocialNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rhf-yb-ris"/>
+                        <viewControllerLayoutGuide type="bottom" id="R06-eV-qH1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kpd-LR-q7w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="FNc-Ml-pwA">
+                                <rect key="frame" x="16" y="249" width="343" height="170"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="Cce-0f-jsB">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beY-p2-WM7">
+                                                <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwC-4p-76D">
+                                                <rect key="frame" x="129" y="0.0" width="214" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="2ka-5D-7h3">
+                                        <rect key="frame" x="0.0" y="70" width="343" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35n-Rc-MvF">
+                                                <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lf7-FR-R15">
+                                                <rect key="frame" x="127" y="0.0" width="216" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNh-MS-j46">
+                                        <rect key="frame" x="154.5" y="140" width="34" height="30"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveButton:" destination="ZwN-5X-b6V" eventType="touchUpInside" id="dSB-Yq-33l"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2ka-5D-7h3" secondAttribute="trailing" id="2fs-bn-gco"/>
+                                    <constraint firstAttribute="trailing" secondItem="Cce-0f-jsB" secondAttribute="trailing" id="6FL-3i-g34"/>
+                                    <constraint firstItem="Cce-0f-jsB" firstAttribute="leading" secondItem="FNc-Ml-pwA" secondAttribute="leading" id="fvZ-IF-QO1"/>
+                                    <constraint firstItem="2ka-5D-7h3" firstAttribute="leading" secondItem="FNc-Ml-pwA" secondAttribute="leading" id="ti0-ga-Nig"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="FNc-Ml-pwA" firstAttribute="leading" secondItem="kpd-LR-q7w" secondAttribute="leadingMargin" id="PfI-EV-s9V"/>
+                            <constraint firstItem="FNc-Ml-pwA" firstAttribute="centerY" secondItem="kpd-LR-q7w" secondAttribute="centerY" id="ezu-ws-MS9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FNc-Ml-pwA" secondAttribute="trailing" id="jEH-Hi-kxW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextbox" destination="Lf7-FR-R15" id="u4V-tv-rLz"/>
+                        <outlet property="usernameTextbox" destination="dwC-4p-76D" id="rgA-cn-vAS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wPU-WP-gM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93.599999999999994" y="1281.4092953523239"/>
         </scene>
         <!--Home-->
         <scene sceneID="RuO-YL-2mP">
@@ -280,7 +372,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="gO0-M5-Wuj">
             <objects>
-                <tabBarController id="cIm-Oe-c7v" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTB" id="cIm-Oe-c7v" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="UY9-P2-4kJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
