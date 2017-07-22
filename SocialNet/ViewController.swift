@@ -26,6 +26,10 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     @IBAction func SignInButton(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn()
     }
+    
+    @IBAction func unwindCancel(segue:UIStoryboardSegue) {
+        
+    }
 
 }
 

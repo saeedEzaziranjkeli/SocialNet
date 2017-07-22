@@ -23,13 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
-//                self.window = UIWindow(frame: UIScreen.main.bounds)
-//                
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
-//                
-//                self.window?.rootViewController = initialViewController
-//                self.window?.makeKeyAndVisible()
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
+                
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
             }
         }
         
@@ -74,14 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     self.window = UIWindow(frame: UIScreen.main.bounds)
                     
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
-
+                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
                     self.window?.rootViewController = initialViewController
                     self.window?.makeKeyAndVisible()
+                    
                 }
                 else{
                     Auth.auth().addStateDidChangeListener{(auth,user) in
                         if user != nil{
+                            
                             self.window = UIWindow(frame: UIScreen.main.bounds)
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
