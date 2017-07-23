@@ -14,8 +14,10 @@
 		482625691F1D334E006315E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482625671F1D334E006315E0 /* LaunchScreen.storyboard */; };
 		482625711F1D33DE006315E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 482625701F1D33DE006315E0 /* GoogleService-Info.plist */; };
 		483BE06F1F1E853B0080A2C3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */; };
-		483BE0711F1E8E540080A2C3 /* MessageContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE0701F1E8E540080A2C3 /* MessageContoller.swift */; };
 		486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */; };
+		4888A9C01F24A7EF00587A86 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */; };
+		4888A9C31F24B9F400587A86 /* NotificationTabelViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4888A9C11F24B9F400587A86 /* NotificationTabelViewCell1.swift */; };
+		4888A9C41F24B9F400587A86 /* NotificationTabelViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4888A9C21F24B9F400587A86 /* NotificationTabelViewCell1.xib */; };
 		48C7713F1F23B5130064F108 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C7713E1F23B5130064F108 /* EditViewController.swift */; };
 		48FF95311F238924005536C9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF95301F238924005536C9 /* SettingViewController.swift */; };
 		52317E8CA7306E149186DBF1 /* Pods_SocialNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A65A8BC87CC8BCABEF670E8 /* Pods_SocialNet.framework */; };
@@ -33,8 +35,10 @@
 		4826256A1F1D334E006315E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		482625701F1D33DE006315E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		483BE0701F1E8E540080A2C3 /* MessageContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContoller.swift; sourceTree = "<group>"; };
 		486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		4888A9C11F24B9F400587A86 /* NotificationTabelViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTabelViewCell1.swift; sourceTree = "<group>"; };
+		4888A9C21F24B9F400587A86 /* NotificationTabelViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTabelViewCell1.xib; sourceTree = "<group>"; };
 		48C7713E1F23B5130064F108 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		48FF95301F238924005536C9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		98E24DE621D83CAB3593E6BF /* Pods-SocialNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialNet.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialNet/Pods-SocialNet.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,7 +92,9 @@
 				48C7713E1F23B5130064F108 /* EditViewController.swift */,
 				483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */,
 				486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */,
-				483BE0701F1E8E540080A2C3 /* MessageContoller.swift */,
+				4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */,
+				4888A9C11F24B9F400587A86 /* NotificationTabelViewCell1.swift */,
+				4888A9C21F24B9F400587A86 /* NotificationTabelViewCell1.xib */,
 				482625651F1D334E006315E0 /* Assets.xcassets */,
 				482625671F1D334E006315E0 /* LaunchScreen.storyboard */,
 				482625701F1D33DE006315E0 /* GoogleService-Info.plist */,
@@ -170,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				482625691F1D334E006315E0 /* LaunchScreen.storyboard in Resources */,
+				4888A9C41F24B9F400587A86 /* NotificationTabelViewCell1.xib in Resources */,
 				482625711F1D33DE006315E0 /* GoogleService-Info.plist in Resources */,
 				482625661F1D334E006315E0 /* Assets.xcassets in Resources */,
 				482625641F1D334E006315E0 /* Main.storyboard in Resources */,
@@ -232,9 +239,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				48FF95311F238924005536C9 /* SettingViewController.swift in Sources */,
-				483BE0711F1E8E540080A2C3 /* MessageContoller.swift in Sources */,
 				486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */,
 				483BE06F1F1E853B0080A2C3 /* ProfileViewController.swift in Sources */,
+				4888A9C01F24A7EF00587A86 /* NotificationViewController.swift in Sources */,
+				4888A9C31F24B9F400587A86 /* NotificationTabelViewCell1.swift in Sources */,
 				482625611F1D334E006315E0 /* ViewController.swift in Sources */,
 				4826255F1F1D334E006315E0 /* AppDelegate.swift in Sources */,
 				48C7713F1F23B5130064F108 /* EditViewController.swift in Sources */,

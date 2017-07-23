@@ -246,23 +246,59 @@
             <point key="canvasLocation" x="-1711.2" y="580.65967016491754"/>
         </scene>
         <!--Notification-->
-        <scene sceneID="6tV-pZ-7y6">
+        <scene sceneID="9jn-1J-B19">
             <objects>
-                <viewController storyboardIdentifier="Notification" id="maw-1G-b5Z" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UtM-eF-sB8"/>
-                        <viewControllerLayoutGuide type="bottom" id="qkc-EL-SYD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nVf-cK-IUa">
+                <tableViewController id="5FC-hA-6oT" customClass="NotificationViewController" customModule="SocialNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="108" sectionHeaderHeight="28" sectionFooterHeight="28" id="SpH-FX-P80">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Notification" image="notification" selectedImage="selectednotification" id="Pjl-vr-QDt"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Lv-aD-IXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="108" id="BOW-bF-8rT" customClass="ProfilNotificationDetailCell" customModule="SocialNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="108"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BOW-bF-8rT" id="gaV-MW-gtv">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IVt-pH-JTh">
+                                            <rect key="frame" x="0.0" y="7" width="375" height="92"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gi5-lF-H7B">
+                                                    <rect key="frame" x="0.0" y="0.0" width="93" height="92"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXc-EX-UTg">
+                                                    <rect key="frame" x="108" y="0.0" width="267" height="20.5"/>
+                                                    <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="IVt-pH-JTh" firstAttribute="leading" secondItem="gaV-MW-gtv" secondAttribute="leading" id="2NX-uF-hZX"/>
+                                        <constraint firstAttribute="trailing" secondItem="IVt-pH-JTh" secondAttribute="trailing" id="ILb-1M-XOC"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userProfileNotificationImage" destination="gi5-lF-H7B" id="LdJ-Ay-w8h"/>
+                                    <outlet property="usernameNotificatinLabel" destination="UXc-EX-UTg" id="dZq-FS-JOH"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5FC-hA-6oT" id="zwM-bf-vqf"/>
+                            <outlet property="delegate" destination="5FC-hA-6oT" id="Sen-8n-kl8"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Notification" image="notification" selectedImage="selectednotification" id="Og5-sY-JMK"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="919-bn-JhI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="582"/>
+            <point key="canvasLocation" x="-970.39999999999998" y="579.76011994002999"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="tWq-u9-NmW">
@@ -456,7 +492,7 @@
                         <segue destination="1eY-DR-NWW" kind="relationship" relationship="viewControllers" id="wlh-GQ-zV6"/>
                         <segue destination="p31-dl-JEd" kind="relationship" relationship="viewControllers" id="5Lw-xP-BHw"/>
                         <segue destination="fpD-U8-CeY" kind="relationship" relationship="viewControllers" id="xqe-Wo-bY0"/>
-                        <segue destination="maw-1G-b5Z" kind="relationship" relationship="viewControllers" id="daw-1R-LBi"/>
+                        <segue destination="5FC-hA-6oT" kind="relationship" relationship="viewControllers" id="74l-eK-ceM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8i-P3-LmY" userLabel="First Responder" sceneMemberID="firstResponder"/>

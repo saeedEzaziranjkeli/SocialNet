@@ -98,6 +98,8 @@ class ProfilDetailCell:UITableViewCell{
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var userProfileImageView: UIImageView!
+    
+    
 
 }
 
