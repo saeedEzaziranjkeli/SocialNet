@@ -14,6 +14,7 @@
 		482625691F1D334E006315E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482625671F1D334E006315E0 /* LaunchScreen.storyboard */; };
 		482625711F1D33DE006315E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 482625701F1D33DE006315E0 /* GoogleService-Info.plist */; };
 		483BE06F1F1E853B0080A2C3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */; };
+		486BFFE31F25334B0059BFD8 /* PostEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486BFFE21F25334B0059BFD8 /* PostEditorViewController.swift */; };
 		486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */; };
 		4888A9C01F24A7EF00587A86 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */; };
 		4888A9C31F24B9F400587A86 /* NotificationTabelViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4888A9C11F24B9F400587A86 /* NotificationTabelViewCell1.swift */; };
@@ -42,6 +43,7 @@
 		4826256A1F1D334E006315E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		482625701F1D33DE006315E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		483BE06E1F1E853A0080A2C3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		486BFFE21F25334B0059BFD8 /* PostEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEditorViewController.swift; sourceTree = "<group>"; };
 		486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		4888A9C11F24B9F400587A86 /* NotificationTabelViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTabelViewCell1.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */,
 				4888A9C11F24B9F400587A86 /* NotificationTabelViewCell1.swift */,
 				4888A9C21F24B9F400587A86 /* NotificationTabelViewCell1.xib */,
+				486BFFE21F25334B0059BFD8 /* PostEditorViewController.swift */,
 				482625651F1D334E006315E0 /* Assets.xcassets */,
 				482625671F1D334E006315E0 /* LaunchScreen.storyboard */,
 				482625701F1D33DE006315E0 /* GoogleService-Info.plist */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48FF95311F238924005536C9 /* SettingViewController.swift in Sources */,
+				486BFFE31F25334B0059BFD8 /* PostEditorViewController.swift in Sources */,
 				486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */,
 				483BE06F1F1E853B0080A2C3 /* ProfileViewController.swift in Sources */,
 				4888A9C01F24A7EF00587A86 /* NotificationViewController.swift in Sources */,

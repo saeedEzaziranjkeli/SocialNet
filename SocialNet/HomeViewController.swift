@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import FirebaseStorage
 class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     struct cellData{
@@ -35,10 +35,10 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             let cell = Bundle.main.loadNibNamed("HomeTableViewCellSlider", owner: self, options: nil)?.first as! HomeTableViewCellSlider
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
+                    self.userId = auth.currentUser?.uid
                     let photoURL = auth.currentUser?.photoURL
                     let data = NSData(contentsOf: photoURL!)
                     cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
-                    //cell.addSubview(cell.userHomeSliderViewImage)
                 }
             }
             return cell
@@ -111,4 +111,56 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         return 240
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 0:
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(imagePicker, animated: true)
+        case 1:
+            performSegue(withIdentifier: "addNewPostSegue", sender: nil)
+        default:
+            break
+        }
+    }
+    var ref: DatabaseReference!
+    //var storage = Storage.storage(url:"gs://socialnet-91a2c.appspot.com/").reference()
+    let storageRef = Storage.storage().reference()
+    var userId:String!
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! HomeTableViewCellSlider
+            cell.userHomeSliderViewImage.image = image;
+            self.dismiss(animated: true, completion: nil)
+            let imagesRef = storageRef.child("images/"+self.userId + "/Profile")
+            //let spaceRef = imagesRef.child("ProfileImage")
+            //let path = spaceRef.fullPath;
+            //let name = spaceRef.name;
+            //let images = spaceRef.parent()
+            //let userUrl = self.storage.child("thomas")
+            let metaDataObj = StorageMetadata()
+            metaDataObj.contentType = "image/jpeg"
+            imagesRef.putData(UIImageJPEGRepresentation(image, 0.0)!, metadata: metaDataObj, completion: { (data, error) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "dare")
+                }
+                else{
+                    print("man okeyam")
+                }
+                let downloadURL = metaDataObj.downloadURLs
+                print(downloadURL)
+            })
+            
+        }
+        else{
+            print("Image has Problem")
+        }
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

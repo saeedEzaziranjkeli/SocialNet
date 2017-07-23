@@ -83,16 +83,17 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
         return indexPath.section == 0 ? 100 : 50
     }
 
- 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let indexpath = tableView.indexPath(for: sender as! UITableViewCell)!
-        if indexpath.item == 0 && indexpath.section == 1 && identifier == "segueEditorViewController" {
-            return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if indexPath.section == 1 && indexPath.item == 0 {
+            performSegue(withIdentifier: "segueEditorViewController", sender: nil)
         }
-        return false
     }
     
-}
+     
+    }
+
+
 class ProfilDetailCell:UITableViewCell{
 
     @IBOutlet weak var usernameLabel: UILabel!

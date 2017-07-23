@@ -10,4 +10,5 @@ target 'SocialNet' do
 pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
   pod 'GoogleSignIn'
+	pod 'Firebase/Storage'
 end

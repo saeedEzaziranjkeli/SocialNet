@@ -9,9 +9,14 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FirebaseStorage
 
 class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     var window:UIWindow?
+    var ref: DatabaseReference!
+    //var storage = Storage.storage(url:"gs://socialnet-91a2c.appspot.com/").reference()
+    let storageRef = Storage.storage().reference()
+    var userId:String!
     @IBAction func signoutButton(_ sender: Any) {
         GIDSignIn.sharedInstance().signOut()
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -37,8 +42,8 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
     @IBOutlet weak var usernameTitle: UILabel!
     
     override func viewDidLoad() {
-        self.usernameTitle.text = " "
         super.viewDidLoad()
+        self.usernameTitle.text = " "
         profileImageView.layer.borderWidth = 3
         profileImageView.layer.masksToBounds = false
         profileImageView.layer.borderColor = UIColor.white.cgColor
@@ -46,6 +51,7 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
         profileImageView.clipsToBounds = true
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
+                self.userId = user?.uid ?? " nil"
                     let username = auth.currentUser?.displayName
                     self.usernameTitle.text = username
                     let photoURL = auth.currentUser?.photoURL
@@ -59,9 +65,28 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
         
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
+               if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
             profileImageView.image = image;
-            self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
+                let imagesRef = storageRef.child("images/"+self.userId + "/Profile")
+                //let spaceRef = imagesRef.child("ProfileImage")
+                //let path = spaceRef.fullPath;
+                //let name = spaceRef.name;
+                //let images = spaceRef.parent()
+            //let userUrl = self.storage.child("thomas")
+            let metaDataObj = StorageMetadata()
+            metaDataObj.contentType = "image/jpeg"
+                imagesRef.putData(UIImageJPEGRepresentation(image, 0.0)!, metadata: metaDataObj, completion: { (data, error) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "dare")
+                    }
+                    else{
+                        print("man okeyam")
+                    }
+                    let downloadURL = metaDataObj.downloadURLs
+                    print(downloadURL)
+                })
+            
                 }
         else{
             print("Image has Problem")
