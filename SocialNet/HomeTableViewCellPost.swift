@@ -10,6 +10,8 @@ import UIKit
 
 class HomeTableViewCellPost: UITableViewCell {
 
-    
-    
+    @IBOutlet weak var userProfileViewImage: UIImageView!
+    @IBOutlet weak var userPostLabel: UILabel!
+    @IBOutlet weak var userCommentPostViewImage: UIImageView!
+    @IBOutlet weak var userCommentLabel: UILabel!
 }

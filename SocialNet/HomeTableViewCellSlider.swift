@@ -10,5 +10,6 @@ import UIKit
 
 class HomeTableViewCellSlider: UITableViewCell {
 
+    @IBOutlet weak var userHomeSliderViewImage: UIImageView!
         
 }
