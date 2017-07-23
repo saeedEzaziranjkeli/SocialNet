@@ -228,7 +228,6 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="F4g-9h-gL9" firstAttribute="centerY" secondItem="zjr-dd-uJI" secondAttribute="centerY" id="KDy-Eq-NuV"/>
                             <constraint firstItem="F4g-9h-gL9" firstAttribute="leading" secondItem="zjr-dd-uJI" secondAttribute="leadingMargin" id="s0q-n1-wrw"/>
@@ -376,6 +375,35 @@
             </objects>
             <point key="canvasLocation" x="784.79999999999995" y="582.45877061469275"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="Qvg-Vs-xQV">
+            <objects>
+                <tableViewController id="f7E-Wm-0rb" customClass="HomeViewController" customModule="SocialNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="T1d-YZ-SP0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dwY-1Z-JPM">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dwY-1Z-JPM" id="0TH-AF-9R6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f7E-Wm-0rb" id="EOr-ws-Al2"/>
+                            <outlet property="delegate" destination="f7E-Wm-0rb" id="5hN-oo-4RS"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="selectedhome" id="Tzt-4G-imC"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ob4-mj-EFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1716" y="581"/>
+        </scene>
         <!--Edit View Controller-->
         <scene sceneID="pNB-WK-XPl">
             <objects>
@@ -443,7 +471,6 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FNc-Ml-pwA" firstAttribute="leading" secondItem="kpd-LR-q7w" secondAttribute="leadingMargin" id="PfI-EV-s9V"/>
                             <constraint firstItem="FNc-Ml-pwA" firstAttribute="centerY" secondItem="kpd-LR-q7w" secondAttribute="centerY" id="ezu-ws-MS9"/>
@@ -457,26 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wPU-WP-gM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93.599999999999994" y="1281.4092953523239"/>
-        </scene>
-        <!--Home-->
-        <scene sceneID="RuO-YL-2mP">
-            <objects>
-                <viewController id="1eY-DR-NWW" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="M9Q-y2-Y2i"/>
-                        <viewControllerLayoutGuide type="bottom" id="vUL-mF-9PX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="13b-R5-KEQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="selectedhome" id="fyR-r4-yUY"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EBK-Wj-09F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1700" y="581.55922038980509"/>
+            <point key="canvasLocation" x="785" y="1421"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gO0-M5-Wuj">
@@ -489,15 +497,15 @@
                         <color key="barTintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="1eY-DR-NWW" kind="relationship" relationship="viewControllers" id="wlh-GQ-zV6"/>
                         <segue destination="p31-dl-JEd" kind="relationship" relationship="viewControllers" id="5Lw-xP-BHw"/>
                         <segue destination="fpD-U8-CeY" kind="relationship" relationship="viewControllers" id="xqe-Wo-bY0"/>
                         <segue destination="5FC-hA-6oT" kind="relationship" relationship="viewControllers" id="74l-eK-ceM"/>
+                        <segue destination="f7E-Wm-0rb" kind="relationship" relationship="viewControllers" id="thE-ZI-MBq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8i-P3-LmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1254" y="-277"/>
+            <point key="canvasLocation" x="-199" y="-238"/>
         </scene>
         <!--Setting-->
         <scene sceneID="7pM-su-2ep">
