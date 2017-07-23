@@ -54,10 +54,20 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
                 self.userId = user?.uid ?? " nil"
                     let username = auth.currentUser?.displayName
                     self.usernameTitle.text = username
-                    let photoURL = auth.currentUser?.photoURL
-                    let data = NSData(contentsOf: photoURL!)
-                    self.profileImageView.image = UIImage(data: data! as Data)
-            }
+                
+                let imagesRef = self.storageRef.child("images/"+self.userId + "/ProfileImage.jpg")
+                imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                    if error == nil{
+                        self.profileImageView.image = UIImage(data: data! as Data)
+                    }
+                    else{
+                        let photoURL = auth.currentUser?.photoURL
+                        let data = NSData(contentsOf: photoURL!)
+                        self.profileImageView.image = UIImage(data: data! as Data)
+                        print("Moshkel darad")
+                    }
+                })
+                                }
             else{
                 print("User must Signin")
             }
@@ -68,12 +78,7 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
                if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
             profileImageView.image = image;
                 self.dismiss(animated: true, completion: nil)
-                let imagesRef = storageRef.child("images/"+self.userId + "/Profile")
-                //let spaceRef = imagesRef.child("ProfileImage")
-                //let path = spaceRef.fullPath;
-                //let name = spaceRef.name;
-                //let images = spaceRef.parent()
-            //let userUrl = self.storage.child("thomas")
+                let imagesRef = storageRef.child("images/"+self.userId + "/ProfileImage.jpg")
             let metaDataObj = StorageMetadata()
             metaDataObj.contentType = "image/jpeg"
                 imagesRef.putData(UIImageJPEGRepresentation(image, 0.0)!, metadata: metaDataObj, completion: { (data, error) in

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,31 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bNk-wd-wvP">
-                                <rect key="frame" x="16" y="220" width="343" height="46"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE5-Rc-2hv">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="46"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="37"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="gE5-Rc-2hv" firstAttribute="leading" secondItem="bNk-wd-wvP" secondAttribute="leading" constant="30" id="1BJ-ii-mvL"/>
-                                    <constraint firstAttribute="trailing" secondItem="gE5-Rc-2hv" secondAttribute="trailing" id="EXB-oA-s9T"/>
-                                    <constraint firstItem="gE5-Rc-2hv" firstAttribute="top" secondItem="bNk-wd-wvP" secondAttribute="top" id="O1v-4r-nyC"/>
-                                    <constraint firstAttribute="bottom" secondItem="gE5-Rc-2hv" secondAttribute="bottom" id="vLC-3R-btr"/>
-                                </constraints>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5r-BR-cdS">
+                                <rect key="frame" x="90" y="307" width="196.5" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                <color key="textColor" red="0.98161664977940111" green="1" blue="0.99981714404738486" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.086394883381206544" green="0.36557039648522272" blue="0.81556490380000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.40784313725490196" green="0.69411764705882351" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="bNk-wd-wvP" firstAttribute="leading" secondItem="z16-1g-4l7" secondAttribute="leadingMargin" id="0DP-5b-AZo"/>
-                            <constraint firstItem="bNk-wd-wvP" firstAttribute="top" secondItem="Lqk-yc-kE9" secondAttribute="bottom" constant="204" id="6UA-zi-xgP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bNk-wd-wvP" secondAttribute="trailing" id="gbO-JZ-fNF"/>
-                            <constraint firstItem="9fL-f1-wqh" firstAttribute="top" secondItem="bNk-wd-wvP" secondAttribute="bottom" constant="397" id="o85-um-Br1"/>
+                            <constraint firstItem="q5r-BR-cdS" firstAttribute="centerX" secondItem="z16-1g-4l7" secondAttribute="centerX" id="Vtj-Wh-dGb"/>
+                            <constraint firstItem="q5r-BR-cdS" firstAttribute="centerY" secondItem="z16-1g-4l7" secondAttribute="centerY" id="qF5-xq-a0k"/>
                         </constraints>
                     </view>
                 </viewController>

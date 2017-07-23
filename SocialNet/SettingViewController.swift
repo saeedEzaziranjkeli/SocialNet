@@ -8,8 +8,12 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class SettingViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    var ref: DatabaseReference!
+    let storageRef = Storage.storage().reference()
+    var userId:String!
     @IBOutlet weak var usernameLabel: UILabel!
 
     @IBOutlet weak var userProfileImage: UIImageView!
@@ -46,9 +50,22 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
                         if user != nil{
                             let username = auth.currentUser?.displayName
                             cell.usernameLabel.text = username
-                            let photoURL = auth.currentUser?.photoURL
-                            let data = NSData(contentsOf: photoURL!)
-                            cell.userProfileImageView.image = UIImage(data: data! as Data)
+//                            let photoURL = auth.currentUser?.photoURL
+//                            let data = NSData(contentsOf: photoURL!)
+//                            cell.userProfileImageView.image = UIImage(data: data! as Data)
+                            self.userId = auth.currentUser?.uid
+                            let imagesRef = self.storageRef.child("images/"+self.userId + "/ProfileImage.jpg")
+                            imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                                if error == nil{
+                                    cell.userProfileImageView.image = UIImage(data: data! as Data)
+                                }
+                                else{
+                                    let photoURL = auth.currentUser?.photoURL
+                                    let data = NSData(contentsOf: photoURL!)
+                                    cell.userProfileImageView.image = UIImage(data: data! as Data)
+                                    print("Moshkel darad")
+                                }
+                            })
                         }
                         else{
                             print("User must Signin")

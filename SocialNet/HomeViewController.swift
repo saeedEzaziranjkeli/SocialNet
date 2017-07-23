@@ -10,7 +10,9 @@ import UIKit
 import Firebase
 import FirebaseStorage
 class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    
+    var ref: DatabaseReference!
+    let storageRef = Storage.storage().reference()
+    var userId:String!
     struct cellData{
         let cell:Int!
         let text:String!
@@ -36,9 +38,19 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
                     self.userId = auth.currentUser?.uid
-                    let photoURL = auth.currentUser?.photoURL
-                    let data = NSData(contentsOf: photoURL!)
-                    cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
+                    let imagesRef = self.storageRef.child("images/"+self.userId + "/HomeImage.jpg")
+                    imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                        if error == nil{
+                            cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
+                        }
+                        else{
+                            let photoURL = auth.currentUser?.photoURL
+                            let data = NSData(contentsOf: photoURL!)
+                            cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
+                            print("Moshkel darad")
+                        }
+                    })
+
                 }
             }
             return cell
@@ -124,22 +136,13 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             break
         }
     }
-    var ref: DatabaseReference!
-    //var storage = Storage.storage(url:"gs://socialnet-91a2c.appspot.com/").reference()
-    let storageRef = Storage.storage().reference()
-    var userId:String!
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
             let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! HomeTableViewCellSlider
             cell.userHomeSliderViewImage.image = image;
             self.dismiss(animated: true, completion: nil)
-            let imagesRef = storageRef.child("images/"+self.userId + "/Profile")
-            //let spaceRef = imagesRef.child("ProfileImage")
-            //let path = spaceRef.fullPath;
-            //let name = spaceRef.name;
-            //let images = spaceRef.parent()
-            //let userUrl = self.storage.child("thomas")
+            let imagesRef = storageRef.child("images/"+self.userId + "/HomeImage.jpg")
             let metaDataObj = StorageMetadata()
             metaDataObj.contentType = "image/jpeg"
             imagesRef.putData(UIImageJPEGRepresentation(image, 0.0)!, metadata: metaDataObj, completion: { (data, error) in
