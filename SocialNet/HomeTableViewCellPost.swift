@@ -10,8 +10,7 @@ import UIKit
 import Firebase
 
 class HomeTableViewCellPost: UITableViewCell {
-    @IBAction func btnAddComment(_ sender: Any) {
-    }
+
     @IBAction func btnDeletePost(_ sender: Any) {
     }
 

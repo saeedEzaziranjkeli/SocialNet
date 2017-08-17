@@ -48,6 +48,7 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
             
             let notificationId = self.ref.child("notifications").childByAutoId().key
             self.ref.child("notifications").child(notificationId).child("userId").setValue(userId)
+            self.ref.child("notifications").child(notificationId).child("postId").setValue(postId)
             self.ref.child("notifications").child(notificationId).child("status").setValue("Add a new Post")
 
             
