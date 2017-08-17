@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sRs-dr-GHb">
-                        <rect key="frame" x="18" y="18" width="362" height="76"/>
+                        <rect key="frame" x="18" y="18.5" width="362" height="76"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rK6-x2-GXA">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="76"/>
@@ -38,7 +38,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ILX-ZX-3xp">
-                        <rect key="frame" x="61" y="111" width="314" height="54"/>
+                        <rect key="frame" x="61" y="111.5" width="314" height="54"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PLb-YY-TvG">
                                 <rect key="frame" x="0.0" y="0.0" width="55" height="54"/>
@@ -55,6 +55,30 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcd-CH-LUl">
+                        <rect key="frame" x="226" y="0.0" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Edit"/>
+                        <connections>
+                            <action selector="btnEditPost:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wPB-Zq-KlE"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-QP-ABr">
+                        <rect key="frame" x="277" y="0.0" width="45" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Delete"/>
+                        <connections>
+                            <action selector="btnDeletePost:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="M2S-N7-qm7"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-Xf-S12">
+                        <rect key="frame" x="283" y="73" width="99" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Add Comment"/>
+                        <connections>
+                            <action selector="btnAddComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vJq-eq-F2H"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sRs-dr-GHb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="0Vp-cH-uso"/>

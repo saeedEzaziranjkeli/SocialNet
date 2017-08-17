@@ -21,17 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-//        Auth.auth().addStateDidChangeListener{(auth,user) in
-//            if user != nil{
-//                self.window = UIWindow(frame: UIScreen.main.bounds)
-//                
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
-//                
-//                self.window?.rootViewController = initialViewController
-//                self.window?.makeKeyAndVisible()
-//            }
-//        }
+        Auth.auth().addStateDidChangeListener{(auth,user) in
+            if user != nil{
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
+                
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+            }
+        }
         
         return true
     }

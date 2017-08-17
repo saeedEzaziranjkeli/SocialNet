@@ -19,6 +19,7 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
     var userId:String!
     @IBAction func signoutButton(_ sender: Any) {
         GIDSignIn.sharedInstance().signOut()
+        try! Auth.auth().signOut()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

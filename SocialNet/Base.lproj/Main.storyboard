@@ -441,6 +441,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="btnSave:" destination="Ocd-aa-a41" eventType="touchUpInside" id="Wjy-xH-9OQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

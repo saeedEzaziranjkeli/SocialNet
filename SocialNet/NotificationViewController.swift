@@ -12,6 +12,7 @@ import Firebase
 
 class NotificationViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
+    var ref: DatabaseReference!
     struct cellData{
         let cell:Int!
         let text:String!
@@ -40,11 +41,34 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
                             let username = auth.currentUser?.displayName
-                            cell.userNameNotificationLabel.text = (username)!
-                            cell.userCommentNotificationLabel.text = "Commented on your Post"
+                            //cell.userNameNotificationLabel.text = (username)!
+                            //cell.userCommentNotificationLabel.text = "Commented on your Post"
                            let photoURL = auth.currentUser?.photoURL
                         let data = NSData(contentsOf: photoURL!)
                    cell.userProfileNotificationViewImage.image = UIImage(data: data! as Data)
+                    
+                    
+                    
+                    
+                    let userPostQuery = self.ref.child("notifications").observe(.childAdded, with: { (snapshot) in
+                        
+                        let post = snapshot.value as? String
+                        if let actualPost = post {
+                            cell.userCommentNotificationLabel.text = actualPost
+                            cell.userNameNotificationLabel.text = actualPost
+                           
+                        }
+                        cell.reloadInputViews()
+                    })
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
             }
             return cell
@@ -54,12 +78,35 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
                     let username = auth.currentUser?.displayName
-                    cell.userNameNotificationLabel.text = (username)!
-                    cell.userCommentNotificationLabel.text = "Commented on your Post"
+                    //cell.userNameNotificationLabel.text = (username)!
+                    //cell.userCommentNotificationLabel.text = "Commented on your Post"
                     let photoURL = auth.currentUser?.photoURL
                     let data = NSData(contentsOf: photoURL!)
                     cell.userProfileNotificationViewImage.image = UIImage(data: data! as Data)
                 }
+                
+                
+                
+                
+                
+                let userPostQuery = self.ref.child("notifications").observe(.childAdded, with: { (snapshot) in
+                    
+                    let post = snapshot.value as? String
+                    if let actualPost = post {
+                        cell.userCommentNotificationLabel.text = actualPost
+                        cell.userNameNotificationLabel.text = actualPost
+                        
+                    }
+                    cell.reloadInputViews()
+                })
+
+                
+                
+                
+                
+                
+                
+                
             }
             return cell
         }
@@ -67,15 +114,6 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-//        if arrayOfCellDate[indexPath.row].cell == 1 {
-//            return 150
-//        }
-//        else if arrayOfCellDate[indexPath.row].cell == 2 {
-//            return 100
-//        }
-//        else if arrayOfCellDate[indexPath.row].cell == 3 {
-//            return 150
-//        }
         return 95
     }
 

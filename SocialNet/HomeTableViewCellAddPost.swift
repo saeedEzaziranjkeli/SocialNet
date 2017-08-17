@@ -7,9 +7,8 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeTableViewCellAddPost: UITableViewCell {
-
-    
-    
+ 
 }
