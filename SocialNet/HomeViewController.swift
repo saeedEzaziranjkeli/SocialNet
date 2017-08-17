@@ -13,9 +13,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         super.viewDidLoad()
         arrayOfCellDate = [cellData(cell:1,text:"Julian Commented on Your Post"),
                            cellData(cell:2,text:"Julian Commented on Your Post"),
-                           cellData(cell:3,text:"Julian Commented on Your Post"),
-                           cellData(cell:4,text:"Julian Commented on Your Post"),
-                           cellData(cell:5,text:"Julian Commented on Your Post"),
+                           cellData(cell:3,text:"Julian Commented on Your Post")
         ]
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,40 +64,12 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                     cell.userCommentLabel.numberOfLines = 0
                 }
             }
+            
             return cell
         }
-        else if arrayOfCellDate[indexPath.row].cell == 4 {
-            let cell = Bundle.main.loadNibNamed("HomeTableViewCellPost", owner: self, options: nil)?.first as! HomeTableViewCellPost
-            Auth.auth().addStateDidChangeListener{(auth,user) in
-                if user != nil{
-                    let photoURL = auth.currentUser?.photoURL
-                    let data = NSData(contentsOf: photoURL!)
-                    cell.userProfileViewImage.image = UIImage(data: data! as Data)
-                    cell.userCommentPostViewImage.image = UIImage(data: data! as Data)
-                    cell.userPostLabel.text = "I want to go :-( , I want to go :-( , I want to go :-("
-                    cell.userCommentLabel.text = "Nooooooooooooooo"
-                    cell.userPostLabel.numberOfLines = 0
-                    cell.userCommentLabel.numberOfLines = 0
-                }
-            }
-            return cell
-        }
-        else if arrayOfCellDate[indexPath.row].cell == 5 {
-            let cell = Bundle.main.loadNibNamed("HomeTableViewCellPost", owner: self, options: nil)?.first as! HomeTableViewCellPost
-            Auth.auth().addStateDidChangeListener{(auth,user) in
-                if user != nil{
-                    let photoURL = auth.currentUser?.photoURL
-                    let data = NSData(contentsOf: photoURL!)
-                    cell.userProfileViewImage.image = UIImage(data: data! as Data)
-                    cell.userCommentPostViewImage.image = UIImage(data: data! as Data)
-                    cell.userPostLabel.text = "I go to School today , I go to School today ,I go to School today , I go to School today"
-                    cell.userCommentLabel.text = "Ahhhhhhhhhh"
-                    cell.userPostLabel.numberOfLines = 0
-                    cell.userCommentLabel.numberOfLines = 0
-                }
-            }
-            return cell
-        }
+
+        //tableView.beginUpdates()
+        //tableView.insertRows(at:[IndexPaths], with: .top)
         return UITableViewCell()
     }
     
@@ -140,11 +110,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             cell.userHomeSliderViewImage.image = image;
             self.dismiss(animated: true, completion: nil)
             let imagesRef = storageRef.child("images/"+self.userId + "/Profile")
-            //let spaceRef = imagesRef.child("ProfileImage")
-            //let path = spaceRef.fullPath;
-            //let name = spaceRef.name;
-            //let images = spaceRef.parent()
-            //let userUrl = self.storage.child("thomas")
             let metaDataObj = StorageMetadata()
             metaDataObj.contentType = "image/jpeg"
             imagesRef.putData(UIImageJPEGRepresentation(image, 0.0)!, metadata: metaDataObj, completion: { (data, error) in
@@ -164,7 +129,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         }
         
     }
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
