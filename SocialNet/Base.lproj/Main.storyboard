@@ -382,13 +382,105 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dwY-1Z-JPM">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeCellSliderImage" rowHeight="200" id="dwY-1Z-JPM" customClass="HomeTableViewCellSlider" customModule="SocialNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dwY-1Z-JPM" id="0TH-AF-9R6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BVJ-xu-CIQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="BVJ-xu-CIQ" firstAttribute="top" secondItem="0TH-AF-9R6" secondAttribute="top" id="5RW-e7-AAS"/>
+                                        <constraint firstItem="BVJ-xu-CIQ" firstAttribute="leading" secondItem="0TH-AF-9R6" secondAttribute="leading" id="Tpn-RF-1QM"/>
+                                        <constraint firstAttribute="bottom" secondItem="BVJ-xu-CIQ" secondAttribute="bottom" id="aG7-Qm-ZoU"/>
+                                        <constraint firstAttribute="trailing" secondItem="BVJ-xu-CIQ" secondAttribute="trailing" id="nPt-U6-aNu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userHomeSliderViewImage" destination="BVJ-xu-CIQ" id="QOX-Li-Bum"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeViewControllerButton" id="fna-yY-iec" customClass="HomeTableViewCellAddPost" customModule="SocialNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="228" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fna-yY-iec" id="qlQ-KD-I9P">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="2yd-LY-a1A">
+                                            <rect key="frame" x="8" y="8" width="359" height="28"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRZ-Ys-J58">
+                                                    <rect key="frame" x="0.0" y="0.0" width="164.5" height="28"/>
+                                                    <state key="normal" title="Add Post"/>
+                                                    <connections>
+                                                        <segue destination="Ocd-aa-a41" kind="show" identifier="addNewPostSegue" id="oE9-Jq-S8J"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AS0-gP-UpQ">
+                                                    <rect key="frame" x="194.5" y="0.0" width="164.5" height="28"/>
+                                                    <state key="normal" title="Add Firend"/>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.62152926053050206" green="1" blue="0.52648962267651012" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="2yd-LY-a1A" secondAttribute="bottom" id="Frv-40-kwv"/>
+                                        <constraint firstAttribute="topMargin" secondItem="2yd-LY-a1A" secondAttribute="top" id="Nt5-xt-vtA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="2yd-LY-a1A" secondAttribute="trailing" id="kwU-E8-jVm"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="2yd-LY-a1A" secondAttribute="leading" id="pct-BA-e98"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeViewControllerPost" rowHeight="150" id="geP-zW-xvp" customClass="HomeTableViewCellPost" customModule="SocialNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="272" width="375" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="geP-zW-xvp" id="a5O-oT-quk">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YZJ-dF-DEY">
+                                            <rect key="frame" x="24" y="16" width="38" height="38"/>
+                                            <color key="backgroundColor" red="0.35686274509999999" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="YZJ-dF-DEY" secondAttribute="height" multiplier="1:1" id="Hry-z1-XfV"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="asdfghjkl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuJ-c4-E3h">
+                                            <rect key="frame" x="78" y="16" width="273" height="38"/>
+                                            <color key="backgroundColor" red="0.40833080760000001" green="0.69601636180000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XnZ-lL-t6E">
+                                            <rect key="frame" x="24" y="62" width="327" height="72"/>
+                                            <color key="backgroundColor" red="0.95722808290000005" green="0.22052234000000001" blue="0.16681230850000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="YZJ-dF-DEY" firstAttribute="leading" secondItem="a5O-oT-quk" secondAttribute="leadingMargin" constant="16" id="1Wd-wH-zQM"/>
+                                        <constraint firstItem="YZJ-dF-DEY" firstAttribute="top" secondItem="a5O-oT-quk" secondAttribute="topMargin" constant="8" id="2GU-qc-qBt"/>
+                                        <constraint firstItem="KuJ-c4-E3h" firstAttribute="height" secondItem="a5O-oT-quk" secondAttribute="width" multiplier="1:10" id="97E-XI-8dm"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="XnZ-lL-t6E" secondAttribute="trailing" constant="16" id="JAI-sM-A1n"/>
+                                        <constraint firstItem="XnZ-lL-t6E" firstAttribute="leading" secondItem="a5O-oT-quk" secondAttribute="leadingMargin" constant="16" id="KS2-CB-3Gs"/>
+                                        <constraint firstItem="KuJ-c4-E3h" firstAttribute="height" secondItem="YZJ-dF-DEY" secondAttribute="height" id="PDk-cX-F4l"/>
+                                        <constraint firstItem="KuJ-c4-E3h" firstAttribute="leading" secondItem="YZJ-dF-DEY" secondAttribute="trailing" constant="16" id="c6C-sg-IaT"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="XnZ-lL-t6E" secondAttribute="bottom" constant="8" id="dvu-oz-pNL"/>
+                                        <constraint firstItem="KuJ-c4-E3h" firstAttribute="top" secondItem="a5O-oT-quk" secondAttribute="topMargin" constant="8" id="oPc-L9-Sny"/>
+                                        <constraint firstItem="XnZ-lL-t6E" firstAttribute="top" secondItem="KuJ-c4-E3h" secondAttribute="bottom" constant="8" id="tKg-SK-79Z"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="KuJ-c4-E3h" secondAttribute="trailing" constant="16" id="zuj-5g-KIT"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userPostLabel" destination="KuJ-c4-E3h" id="hWo-mT-FQ8"/>
+                                    <outlet property="userProfileViewImage" destination="YZJ-dF-DEY" id="pFb-U7-Sq7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -398,7 +490,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="GYA-oo-XmD"/>
                     <connections>
-                        <segue destination="Ocd-aa-a41" kind="show" identifier="addNewPostSegue" id="qjN-rY-RwK"/>
+                        <segue destination="Ocd-aa-a41" kind="show" identifier="editPostSegue" id="agH-lB-Ppx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ob4-mj-EFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -748,4 +840,7 @@
         <image name="selectedsetting" width="30" height="30"/>
         <image name="setting" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="agH-lB-Ppx"/>
+    </inferredMetricsTieBreakers>
 </document>
