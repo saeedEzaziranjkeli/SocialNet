@@ -90,7 +90,7 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
                         print("man okeyam")
                     }
                     let downloadURL = metaDataObj.downloadURLs
-                    print(downloadURL)
+                    print(downloadURL ?? "There is now Row")
                 })
             
                 }

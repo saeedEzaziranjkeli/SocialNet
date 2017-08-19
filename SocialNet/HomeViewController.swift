@@ -3,6 +3,7 @@ import Firebase
 import FirebaseStorage
 class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     var ref: DatabaseReference!
+
     var countOfPostCell = 0{
         didSet{
             tableView.reloadData()
@@ -15,6 +16,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                 self.userId = auth.currentUser?.uid
                 _ = self.ref.child("posts").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.value, with: { (snapshot) in
                     self.countOfPostCell = Int(snapshot.childrenCount)
+
                     let post = snapshot.value as? NSDictionary
                     for (_,item) in post!{
                         self.postsList.append(item as? NSDictionary)
@@ -32,6 +35,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                 })
             }
         }
+
 }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,8 +64,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewControllerPost") as! HomeTableViewCellPost
             
             let _indexDatabase = indexPath.row - 2
-            print("66666666666",_indexDatabase)
-            //print("00000000000",self.postsList[_indexDatabase] ?? "6565656565")
             //BEGIN
 
             Auth.auth().addStateDidChangeListener{(auth,user) in
@@ -142,7 +144,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                     print("man okeyam")
                 }
                 let downloadURL = metaDataObj.downloadURLs
-                print(downloadURL)
+                print(downloadURL ?? "There is now Row")
             })
             
         }
@@ -165,16 +167,20 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, _indexPath) in
             self.performSegue(withIdentifier: "editPostSegue", sender: nil)
         }
+
         let comment = UITableViewRowAction(style: .normal, title: "+Com.") { (action, _indexPath) in
             self.performSegue(withIdentifier: "addCommentSegue", sender: nil)
         }
+
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, _indexPath) in
             
         }
         edit.backgroundColor = .blue
+
         comment.backgroundColor = .yellow
     
         return [edit,delete,comment]
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -183,12 +189,14 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editPostSegue"{
-            let peVC = segue.destination as! PostEditorViewController
+            _ = segue.destination as! PostEditorViewController
 //            peVC.postTextView.text = "Baghali"
         }
+
         else if segue.identifier == "addCommentSegue"{
-            let addComment = segue.destination as! CommentViewController
+            _ = segue.destination as! CommentViewController
             //            peVC.postTextView.text = "Baghali"
         }
+
     }
 }
