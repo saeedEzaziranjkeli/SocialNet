@@ -59,6 +59,8 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
     }
+    
+    
 
     
 }
