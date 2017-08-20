@@ -34,18 +34,18 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath)
-        cell.imageView?.layer.borderWidth = 2
-        cell.imageView?.layer.masksToBounds = false
-        cell.imageView?.layer.borderColor = UIColor.white.cgColor
-        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
-        cell.imageView?.clipsToBounds = true
+       
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
                         let username = auth.currentUser?.displayName
                         let photoURL = auth.currentUser?.photoURL
                         let data = NSData(contentsOf: photoURL!)
                         cell.imageView?.image = UIImage(data: data! as Data)
-                   
+                    cell.imageView?.layer.borderWidth = 2
+                    cell.imageView?.layer.masksToBounds = false
+                    cell.imageView?.layer.borderColor = UIColor.white.cgColor
+                    cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
+                    cell.imageView?.clipsToBounds = true
                     _ = self.ref.child("notifications").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.childAdded, with: { (snapshot) in
                         guard snapshot.exists() else{
                             print ("There is no Rooooooooooooow")
@@ -53,9 +53,12 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
                         }
                         cell.textLabel?.text = self.commentList[indexPath.row]?["status"] as! String?
                         cell.detailTextLabel?.text = username
+                        
                     })
                 }
-            }
+                //tableView.reloadData()
+        }
+        
             return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{

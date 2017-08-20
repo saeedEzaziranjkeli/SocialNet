@@ -15,30 +15,41 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             tableView.reloadData()
         }
     }
-    var postsListID = [NSDictionary?](){
+    var commentList = [NSDictionary?](){
         didSet{
             tableView.reloadData()
         }
     }
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-                self.ref = Database.database().reference()
+        self.ref = Database.database().reference()
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
                 self.userId = auth.currentUser?.uid
                 _ = self.ref.child("posts").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.value, with: { (snapshot) in
+                    guard snapshot.exists() else {
+                        return
+                    }
                     self.countOfPostCell = Int(snapshot.childrenCount)
-                    self.postsListID.append(snapshot.key as? NSDictionary)
-                    print("6565656565656565656565",snapshot.key)
                     let post = snapshot.value as? NSDictionary
                     for (_,item) in post!{
-                       
                         self.postsList.append(item as? NSDictionary)
                     }
+                    self.tableView.reloadData()
                 })
+                _ = self.ref.child("comments").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.value, with: { (snapshot) in
+                    guard snapshot.exists() else {
+                        return
+                    }
+                    let post = snapshot.value as? NSDictionary
+                    for (_,item) in post!{
+                        self.commentList.append(item as? NSDictionary)
+                    }
+                })
+
             }
         }
 }
@@ -78,6 +89,11 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                 }
                     cell.userPostLabel.text = self.postsList[_indexDatabase]?["message"] as! String?
                     cell.userPostLabel.numberOfLines = 0
+                    //cell.CommentTableView.insertRows(at:[IndexPath(row:self.commentList.count-1,section:0)],with:.automatic)
+                
+//                let commentCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+                
+                
                 
             }
             return cell
@@ -150,17 +166,26 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         }
 
         let comment = UITableViewRowAction(style: .normal, title: "+Com.") { (action, _indexPath) in
+            self.postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
             self.performSegue(withIdentifier: "addCommentSegue", sender: nil)
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, _indexPath) in
-            
+            Auth.auth().addStateDidChangeListener{(auth,user) in
+                if user != nil {
+                    let postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
+                    //print("PostttttttId",postId)
+                    self.ref.child("posts").child(postId!).removeValue{error in
+                        tableView.reloadData()
+                    }
+                    self.ref.child("notifications").child(postId!).removeValue()
+                    tableView.reloadData()
+                }
+            }
             
         }
         edit.backgroundColor = .blue
-
         comment.backgroundColor = .gray
-    
         return [edit,delete,comment]
 
     }
@@ -172,7 +197,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editPostSegue"{
             if let edCV = segue.destination as? PostEditorViewController{
-                print("555555555555",self.postId)
                 edCV.postId = self.postId
             }
         }

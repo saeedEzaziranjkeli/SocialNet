@@ -10,20 +10,10 @@ import UIKit
 import Firebase
 
 class HomeTableViewCellPost: UITableViewCell {
-
-    @IBAction func btnDeletePost(_ sender: Any) {
-        
-    }
-
-    @IBAction func btnEditPost(_ sender: Any) {
-        
-    }
+    @IBOutlet weak var CommentTableView: ContentFittingTableView!
     @IBOutlet weak var userProfileViewImage: UIImageView!
     @IBOutlet weak var userPostLabel: UILabel!
     @IBOutlet weak var userCommentPostViewImage: UIImageView!
     @IBOutlet weak var userCommentLabel: UILabel!
-    
-    var postId:String!
-    
     
 }

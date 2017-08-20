@@ -10,6 +10,16 @@ class CommentViewController : UIViewController,UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.commentTextView.delegate = self
+        if postId != ""{
+            _ = self.ref.child("comments").queryOrdered(byChild: "postId").queryEqual(toValue: self.postId).observe(.childAdded, with: { (snapshot) in
+                guard snapshot.exists() else{
+                    print ("There is no Rooooooooooooow")
+                    return
+                }
+                let post = snapshot.value as? NSDictionary
+                self.commentTextView.text = post?["message"] as? String
+            })
+        }
     }
     @IBOutlet weak var commentTextView: UITextView!{
         didSet{
@@ -20,6 +30,18 @@ class CommentViewController : UIViewController,UITextViewDelegate
     @IBAction func btnSaveComment(_ sender: Any) {
         let userComment = self.commentTextView.text
         self.ref = Database.database().reference()
+        if self.postId != "" {
+            let postRef = self.ref.child("comments").child(self.postId)
+            let post = ["message":userComment]
+            let childUpdates = ["/comments/\(self.postId)/":post]
+            postRef.updateChildValues(childUpdates)
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
+        
         if userComment != nil {
             let commentId = self.ref.child("comments").childByAutoId().key
             let userId = Auth.auth().currentUser?.uid

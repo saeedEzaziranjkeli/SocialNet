@@ -13,14 +13,12 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
 {
     var window: UIWindow?
     var ref : DatabaseReference!
-    var postId:String!
+    var postId:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = Database.database().reference()
         self.postTextView.delegate = self
-        print("000000000000011111111111111",self.postId)
         if postId != ""{
-            
             _ = self.ref.child("posts").queryOrdered(byChild: "postId").queryEqual(toValue: self.postId).observe(.childAdded, with: { (snapshot) in
                 guard snapshot.exists() else{
                     print ("There is no Rooooooooooooow")
@@ -57,8 +55,7 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
         if self.postId != "" {
             let postRef = self.ref.child("posts").child(self.postId)
             let post = ["message":userPost]
-            let childUpdates = ["/posts/\(self.postId)/":post]
-            postRef.updateChildValues(childUpdates)
+            postRef.updateChildValues(post)
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
@@ -66,7 +63,7 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
             self.window?.makeKeyAndVisible()
         }
         
-        if userPost != nil {
+        else if userPost != nil {
             let postId = self.ref.child("posts").childByAutoId().key
             let userId = Auth.auth().currentUser?.uid
             self.ref.child("posts").child(postId).child("userId").setValue(userId)
