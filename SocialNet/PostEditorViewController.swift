@@ -13,9 +13,24 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
 {
     var window: UIWindow?
     var ref : DatabaseReference!
+    var postId:String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = Database.database().reference()
         self.postTextView.delegate = self
+        print("000000000000011111111111111",self.postId)
+        if postId != ""{
+            
+            _ = self.ref.child("posts").queryOrdered(byChild: "postId").queryEqual(toValue: self.postId).observe(.childAdded, with: { (snapshot) in
+                guard snapshot.exists() else{
+                    print ("There is no Rooooooooooooow")
+                    return
+                }
+                let post = snapshot.value as? NSDictionary
+                self.postTextView.text = post?["message"] as? String
+            })
+        }
+        
     }
 
 
@@ -38,11 +53,25 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
     @IBAction func btnSave(_ sender: Any) {
         let userPost = self.postTextView.text
         self.ref = Database.database().reference()
+        
+        if self.postId != "" {
+            let postRef = self.ref.child("posts").child(self.postId)
+            let post = ["message":userPost]
+            let childUpdates = ["/posts/\(self.postId)/":post]
+            postRef.updateChildValues(childUpdates)
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
+        
         if userPost != nil {
             let postId = self.ref.child("posts").childByAutoId().key
             let userId = Auth.auth().currentUser?.uid
             self.ref.child("posts").child(postId).child("userId").setValue(userId)
             self.ref.child("posts").child(postId).child("message").setValue(userPost)
+            self.ref.child("posts").child(postId).child("postId").setValue(postId)
             self.ref.child("posts").child(postId).child("isPublic").setValue(true)
             self.ref.child("posts").child(postId).child("Date").setValue(ServerValue.timestamp())
             

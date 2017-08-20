@@ -12,49 +12,52 @@ import Firebase
 
 class NotificationViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
+    var userId:String!
+    @IBOutlet var NotificationsTableView: UITableView!
+    var commentList = [NSDictionary?]()
     var ref: DatabaseReference!
-    struct cellData{
-        let cell:Int!
-        let text:String!
-    }
-    var arrayOfCellDate = [cellData]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        arrayOfCellDate = [cellData(cell:1,text:"Julian Commented on Your Post"),
-        cellData(cell:1,text:"Julian Commented on Your Post"),]
+        self.ref = Database.database().reference()
+                    self.userId = Auth.auth().currentUser?.uid
+                _ = self.ref.child("notifications").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.childAdded, with: { (snapshot) in
+                    self.commentList.append(snapshot.value as? NSDictionary)
+                    self.NotificationsTableView.insertRows(at: [IndexPath(row:self.commentList.count-1,section:0)], with: .automatic)
+                })
+
+    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfCellDate.count
+        return self.commentList.count
     }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            self.ref = Database.database().reference()
-        if arrayOfCellDate[indexPath.row].cell == 1 {
-            let cell = Bundle.main.loadNibNamed("NotificationTabelViewCell1", owner: self, options: nil)?.first as! NotificationTabelViewCell1
+         let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath)
+        cell.imageView?.layer.borderWidth = 2
+        cell.imageView?.layer.masksToBounds = false
+        cell.imageView?.layer.borderColor = UIColor.white.cgColor
+        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
+        cell.imageView?.clipsToBounds = true
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
-                            let username = auth.currentUser?.displayName
-                           let photoURL = auth.currentUser?.photoURL
+                        let username = auth.currentUser?.displayName
+                        let photoURL = auth.currentUser?.photoURL
                         let data = NSData(contentsOf: photoURL!)
-                   cell.userProfileNotificationViewImage.image = UIImage(data: data! as Data)
-                    _ = self.ref.child("notifications").queryOrdered(byChild: "userId").observe(.childAdded, with: { (snapshot) in
+                        cell.imageView?.image = UIImage(data: data! as Data)
+                   
+                    _ = self.ref.child("notifications").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.childAdded, with: { (snapshot) in
                         guard snapshot.exists() else{
                             print ("There is no Rooooooooooooow")
                             return
                         }
-                        
-                        let post = snapshot.value as? NSDictionary
-                        cell.userCommentNotificationLabel.text = post?["status"] as! String?
-                        cell.userNameNotificationLabel.text = username
-                        cell.reloadInputViews()
+                        cell.textLabel?.text = self.commentList[indexPath.row]?["status"] as! String?
+                        cell.detailTextLabel?.text = username
                     })
                 }
             }
             return cell
-        }
-        return UITableViewCell()
     }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 95
     }

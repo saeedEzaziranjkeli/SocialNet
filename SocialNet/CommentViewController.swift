@@ -6,14 +6,15 @@ class CommentViewController : UIViewController,UITextViewDelegate
 {
     var window: UIWindow?
     var ref : DatabaseReference!
+    var postId : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.commentTextView.delegate = self
     }
     @IBOutlet weak var commentTextView: UITextView!{
         didSet{
-            self.commentTextView.layer.borderWidth = 1.0
-            self.commentTextView.layer.borderColor = UIColor.purple.cgColor
+            self.commentTextView.layer.borderWidth = 2.0
+            self.commentTextView.layer.borderColor = UIColor.black.cgColor
         }
     }
     @IBAction func btnSaveComment(_ sender: Any) {
@@ -24,11 +25,12 @@ class CommentViewController : UIViewController,UITextViewDelegate
             let userId = Auth.auth().currentUser?.uid
             self.ref.child("comments").child(commentId).child("userId").setValue(userId)
             self.ref.child("comments").child(commentId).child("message").setValue(userComment)
+            self.ref.child("comments").child(commentId).child("postId").setValue(postId)
             self.ref.child("comments").child(commentId).child("isPublic").setValue(true)
-            self.ref.child("comments").child(commentId).child("Date").setValue(ServerValue.timestamp())
-            
+        self.ref.child("comments").child(commentId).child("Date").setValue(ServerValue.timestamp())
             let notificationId = self.ref.child("notifications").childByAutoId().key
             self.ref.child("notifications").child(notificationId).child("userId").setValue(userId)
+            self.ref.child("notifications").child(notificationId).child("postId").setValue(postId)
             self.ref.child("notifications").child(notificationId).child("status").setValue("Add a new Comment on your Post")
             
             

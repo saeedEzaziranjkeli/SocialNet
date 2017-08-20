@@ -9,9 +9,15 @@
 import UIKit
 
 class NotificationTabelViewCell1: UITableViewCell {
-
-    @IBOutlet weak var userNameNotificationLabel: UILabel!
-    @IBOutlet weak var userProfileNotificationViewImage: UIImageView!
-        
-    @IBOutlet weak var userCommentNotificationLabel: UILabel!
+    
+    
+//    @IBOutlet weak var userProfileNotificationViewImage: UIImageView!
+//    
+//    
+//    @IBOutlet weak var userNameNotificationLabel: UILabel!
+//    
+//    @IBOutlet weak var userNotificationStatus: UILabel!
+//    
+    
+    
 }

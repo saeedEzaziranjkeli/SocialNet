@@ -13,11 +13,15 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
     var postsList = [NSDictionary?](){
         didSet{
             tableView.reloadData()
-            
+        }
+    }
+    var postsListID = [NSDictionary?](){
+        didSet{
+            tableView.reloadData()
         }
     }
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,15 +31,16 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                 self.userId = auth.currentUser?.uid
                 _ = self.ref.child("posts").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.value, with: { (snapshot) in
                     self.countOfPostCell = Int(snapshot.childrenCount)
-
+                    self.postsListID.append(snapshot.key as? NSDictionary)
+                    print("6565656565656565656565",snapshot.key)
                     let post = snapshot.value as? NSDictionary
                     for (_,item) in post!{
+                       
                         self.postsList.append(item as? NSDictionary)
                     }
                 })
             }
         }
-
 }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,42 +69,19 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewControllerPost") as! HomeTableViewCellPost
             
             let _indexDatabase = indexPath.row - 2
-            //BEGIN
-
             Auth.auth().addStateDidChangeListener{(auth,user) in
-                if user != nil{
+                if user != nil {
                     let photoURL = auth.currentUser?.photoURL
                     let data = NSData(contentsOf: photoURL!)
                     self.userId = auth.currentUser?.uid
                     cell.userProfileViewImage.image = UIImage(data: data! as Data)
-                    //cell.userCommentPostViewImage.image = UIImage(data: data! as Data)
-//                    _ = self.ref.child("posts").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.childAdded, with: { (snapshot) in
-////                        
-////                        guard snapshot.exists() else{
-////                            print ("There is no Rooooooooooooow")
-////                            return
-////                        }
-////                        
-//                       let post = snapshot.value as? NSDictionary
-////                        print("5555555555555555555",post?["message"] as! String?)
-////                        
-//                    })
-//                    //cell.userCommentLabel.text = "Gooddddddddd"
-//                    cell.userPostLabel.numberOfLines = 0
-//                    //cell.userCommentLabel.numberOfLines = 0
-//                    
-       }
-//                    
+                }
                     cell.userPostLabel.text = self.postsList[_indexDatabase]?["message"] as! String?
-
+                    cell.userPostLabel.numberOfLines = 0
+                
             }
-            
-            //END
             return cell
         }
-
-        //tableView.beginUpdates()
-        //tableView.insertRows(at:[IndexPaths], with: .top)
         return UITableViewCell()
     }
     
@@ -123,8 +105,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             break
         }
     }
-    
-    //var storage = Storage.storage(url:"gs://socialnet-91a2c.appspot.com/").reference()
     let storageRef = Storage.storage().reference()
     var userId:String!
     
@@ -161,10 +141,11 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         return true
 
     }
-    
+    var postId:String!
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
        
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, _indexPath) in
+            self.postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
             self.performSegue(withIdentifier: "editPostSegue", sender: nil)
         }
 
@@ -174,10 +155,11 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
 
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, _indexPath) in
             
+            
         }
         edit.backgroundColor = .blue
 
-        comment.backgroundColor = .yellow
+        comment.backgroundColor = .gray
     
         return [edit,delete,comment]
 
@@ -189,13 +171,16 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editPostSegue"{
-            _ = segue.destination as! PostEditorViewController
-//            peVC.postTextView.text = "Baghali"
+            if let edCV = segue.destination as? PostEditorViewController{
+                print("555555555555",self.postId)
+                edCV.postId = self.postId
+            }
         }
 
         else if segue.identifier == "addCommentSegue"{
-            _ = segue.destination as! CommentViewController
-            //            peVC.postTextView.text = "Baghali"
+            if let cmVC = segue.destination as? CommentViewController{
+                cmVC.postId = self.postId
+            }
         }
 
     }
