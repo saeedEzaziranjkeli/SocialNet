@@ -15,11 +15,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             tableView.reloadData()
         }
     }
-    var commentList = [NSDictionary?](){
-        didSet{
-            tableView.reloadData()
-        }
-    }
+
     
     
     override func viewDidLoad() {
@@ -40,15 +36,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                     }
                     self.tableView.reloadData()
                 })
-                _ = self.ref.child("comments").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.value, with: { (snapshot) in
-                    guard snapshot.exists() else {
-                        return
-                    }
-                    let post = snapshot.value as? NSDictionary
-                    for (_,item) in post!{
-                        self.commentList.append(item as? NSDictionary)
-                    }
-                })
+               
 
             }
         }
@@ -167,7 +155,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
 
         let comment = UITableViewRowAction(style: .normal, title: "+Com.") { (action, _indexPath) in
             self.postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
-            self.performSegue(withIdentifier: "addCommentSegue", sender: nil)
+            self.performSegue(withIdentifier: "CommentsTableSegue", sender: nil)
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, _indexPath) in
@@ -176,8 +164,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                     let postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
                     //print("PostttttttId",postId)
                     self.ref.child("posts").child(postId!).removeValue{error in
-                        tableView.reloadData()
-                    }
+                        tableView.reloadData()                    }
                     self.ref.child("notifications").child(postId!).removeValue()
                     tableView.reloadData()
                 }
@@ -200,12 +187,10 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                 edCV.postId = self.postId
             }
         }
-
-        else if segue.identifier == "addCommentSegue"{
-            if let cmVC = segue.destination as? CommentViewController{
-                cmVC.postId = self.postId
-            }
+        if segue.identifier == "CommentsTableSegue"{
+            print("5555555555555555",self.postId)
+           let cmTVC = segue.destination as? CommentTableViewController
+            cmTVC?.postId = self.postId
         }
-
     }
 }
