@@ -182,11 +182,13 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("Hello")
         if segue.identifier == "editPostSegue"{
             if let edCV = segue.destination as? PostEditorViewController{
                 edCV.postId = self.postId
             }
         }
+        
         if segue.identifier == "CommentsTableSegue"{
             print("5555555555555555",self.postId)
            let cmTVC = segue.destination as? CommentTableViewController
