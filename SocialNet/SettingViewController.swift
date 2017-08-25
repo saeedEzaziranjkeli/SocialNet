@@ -9,8 +9,10 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import GoogleSignIn
 
 class SettingViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    var window:UIWindow?
     var ref: DatabaseReference!
     let storageRef = Storage.storage().reference()
     var userId:String!
@@ -41,18 +43,14 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: profileDetailCellID) as! ProfilDetailCell
-           
-                    cell.userProfileImageView.layer.borderWidth = 1
+            cell.userProfileImageView.layer.borderWidth = 1
             cell.userProfileImageView.layer.masksToBounds = true
             cell.userProfileImageView.layer.borderColor = UIColor.white.cgColor
-                    cell.userProfileImageView.layer.cornerRadius = cell.userProfileImageView.bounds.size.height/2
+            cell.userProfileImageView.layer.cornerRadius = cell.userProfileImageView.bounds.size.height/2
                     Auth.auth().addStateDidChangeListener{(auth,user) in
                         if user != nil{
                             let username = auth.currentUser?.displayName
                             cell.usernameLabel.text = username
-//                            let photoURL = auth.currentUser?.photoURL
-//                            let data = NSData(contentsOf: photoURL!)
-//                            cell.userProfileImageView.image = UIImage(data: data! as Data)
                             self.userId = auth.currentUser?.uid
                             let imagesRef = self.storageRef.child("images/"+self.userId + "/ProfileImage.jpg")
                             imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
@@ -60,10 +58,13 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
                                     cell.userProfileImageView.image = UIImage(data: data! as Data)
                                 }
                                 else{
-                                    let photoURL = auth.currentUser?.photoURL
-                                    let data = NSData(contentsOf: photoURL!)
-                                    cell.userProfileImageView.image = UIImage(data: data! as Data)
-                                    print("Moshkel darad")
+                                    if let photoURL = auth.currentUser?.photoURL{
+                                        let data = NSData(contentsOf: photoURL)
+                                        cell.userProfileImageView.image = UIImage(data: data! as Data)
+                                    }
+                                    else{
+                                        cell.userProfileImageView.image = UIImage(named:"DefaultProfile")
+                                    }
                                 }
                             })
                         }
@@ -105,9 +106,19 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
         if indexPath.section == 1 && indexPath.item == 0 {
             performSegue(withIdentifier: "segueEditorViewController", sender: nil)
         }
+        if indexPath.section == 2 && indexPath.item == 0 {
+            GIDSignIn.sharedInstance().signOut()
+            try! Auth.auth().signOut()
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticationVC")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+
+        }
     }
     
-     
+    
     }
 
 

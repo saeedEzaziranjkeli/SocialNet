@@ -73,7 +73,4 @@ class RegisterViewController:UIViewController,UITextFieldDelegate{
         userPasswordtext.resignFirstResponder()
         return true
     }
-    /**
-     * Called when the user click on the view (outside the UITextField).
-     */
    }
