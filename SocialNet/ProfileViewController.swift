@@ -53,22 +53,24 @@ class ProfileViewController:UIViewController,UIImagePickerControllerDelegate,UIN
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
                 self.userId = user?.uid ?? " nil"
-                    let username = auth.currentUser?.displayName
-                    self.usernameTitle.text = username
-                
+                let username = auth.currentUser?.displayName
+                self.usernameTitle.text = username
                 let imagesRef = self.storageRef.child("images/"+self.userId + "/ProfileImage.jpg")
                 imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
                     if error == nil{
                         self.profileImageView.image = UIImage(data: data! as Data)
                     }
                     else{
-                        let photoURL = auth.currentUser?.photoURL
-                        let data = NSData(contentsOf: photoURL!)
-                        self.profileImageView.image = UIImage(data: data! as Data)
-                        print("Moshkel darad")
+                        if let photoURL = auth.currentUser?.photoURL{
+                            let data = NSData(contentsOf: photoURL)
+                            self.profileImageView.image = UIImage(data: data! as Data)
+                        }
+                        else{
+                            self.profileImageView.image = UIImage(named:"DefaultProfile")
+                        }
                     }
                 })
-                                }
+            }
             else{
                 print("User must Signin")
             }

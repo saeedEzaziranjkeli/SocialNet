@@ -6,7 +6,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
     var postsList = [NSDictionary?]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.ref = Database.database().reference()
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
@@ -23,8 +22,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                     }
                     self.tableView.reloadData()
                 })
-               
-
             }
         }
 }
@@ -40,9 +37,21 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
                     self.userId = auth.currentUser?.uid
-                    let photoURL = auth.currentUser?.photoURL
-                    let data = NSData(contentsOf: photoURL!)
-                    cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
+                    let imagesRef = self.storageRef.child("images/"+self.userId + "/Profile.jpg")
+                    imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                        if error == nil{
+                            cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
+                        }
+                        else{
+                            if let photoURL = auth.currentUser?.photoURL{
+                                let data = NSData(contentsOf: photoURL)
+                                cell.userHomeSliderViewImage.image = UIImage(data: data! as Data)
+                            }
+                            else{
+                                cell.userHomeSliderViewImage.image = UIImage(named:"DefaultProfile")
+                            }
+                        }
+                    })
                 }
             }
             return cell
@@ -53,17 +62,20 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         }
         else if indexPath.row >= 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewControllerPost") as! HomeTableViewCellPost
-            
             let _indexDatabase = indexPath.row - 2
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil {
-                    let photoURL = auth.currentUser?.photoURL
-                    let data = NSData(contentsOf: photoURL!)
                     self.userId = auth.currentUser?.uid
-                    cell.userProfileViewImage.image = UIImage(data: data! as Data)
-                }
+                    if let photoURL = auth.currentUser?.photoURL{
+                        let data = NSData(contentsOf: photoURL)
+                        cell.userProfileViewImage.image = UIImage(data: data! as Data)
+                    }
+                    else{
+                        cell.userProfileViewImage.image = UIImage(named:"DefaultProfile")
+                    }
                     cell.userPostLabel.text = self.postsList[_indexDatabase]?["message"] as! String?
                     cell.userPostLabel.numberOfLines = 0
+                }
             }
             return cell
         }
@@ -98,7 +110,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! HomeTableViewCellSlider
             cell.userHomeSliderViewImage.image = image;
             self.dismiss(animated: true, completion: nil)
-            let imagesRef = storageRef.child("images/"+self.userId + "/Profile")
+            let imagesRef = storageRef.child("images/"+self.userId + "/Profile.jpg")
             let metaDataObj = StorageMetadata()
             metaDataObj.contentType = "image/jpeg"
             imagesRef.putData(UIImageJPEGRepresentation(image, 0.0)!, metadata: metaDataObj, completion: { (data, error) in

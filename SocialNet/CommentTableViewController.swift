@@ -13,7 +13,7 @@ class CommentTableViewController : UITableViewController
         super.viewDidLoad()
         if self.postId != ""{
             self.ref = Database.database().reference()
-            _ = self.ref.child("comments").queryOrdered(byChild: "postId").queryEqual(toValue: self.postId).queryOrdered(byChild: "commentId").observe(.value, with: { (snapshot) in
+            _ = self.ref.child("comments").queryOrdered(byChild: "postId").queryEqual(toValue: self.postId).observe(.value, with: { (snapshot) in
                 
                 guard snapshot.exists() else{
                     print ("There is no Rooooooooooooow")
