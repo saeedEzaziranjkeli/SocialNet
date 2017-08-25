@@ -3,33 +3,20 @@ import Firebase
 import FirebaseStorage
 class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     var ref: DatabaseReference!
-
-    var countOfPostCell = 0{
-        didSet{
-            tableView.reloadData()
-        }
-    }
-
-    var postsList = [NSDictionary?](){
-        didSet{
-            tableView.reloadData()
-        }
-    }
-
-    
-    
+    var postsList = [NSDictionary?]()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.ref = Database.database().reference()
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
+                self.postsList = [NSDictionary]()
                 self.userId = auth.currentUser?.uid
                 _ = self.ref.child("posts").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.value, with: { (snapshot) in
                     guard snapshot.exists() else {
                         return
                     }
-                    self.countOfPostCell = Int(snapshot.childrenCount)
+                    self.postsList = [NSDictionary]()
                     let post = snapshot.value as? NSDictionary
                     for (_,item) in post!{
                         self.postsList.append(item as? NSDictionary)
@@ -43,7 +30,7 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
 }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2  + self.countOfPostCell
+        return 2  + self.postsList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,12 +64,6 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                 }
                     cell.userPostLabel.text = self.postsList[_indexDatabase]?["message"] as! String?
                     cell.userPostLabel.numberOfLines = 0
-                    //cell.CommentTableView.insertRows(at:[IndexPath(row:self.commentList.count-1,section:0)],with:.automatic)
-                
-//                let commentCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
-                
-                
-                
             }
             return cell
         }
@@ -162,13 +143,11 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil {
                     let postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
-                    //print("PostttttttId",postId)
                     self.ref.child("posts").child(postId!).removeValue{error in
                         
                    }
                     self.ref.child("notifications").child(postId!).removeValue()
-                    self.countOfPostCell -= 1
-                    //tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.postsList = [NSDictionary]()
                     
                 }
             }
@@ -193,9 +172,9 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
         }
         
         if segue.identifier == "CommentsTableSegue"{
-            print("5555555555555555",self.postId)
-           let cmTVC = segue.destination as? CommentTableViewController
-            cmTVC?.postId = self.postId
+            if let cmTVC = segue.destination as? CommentTableViewController{
+                cmTVC.postId = self.postId
+            }
         }
     }
 }

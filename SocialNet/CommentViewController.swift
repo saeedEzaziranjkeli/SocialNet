@@ -7,11 +7,13 @@ class CommentViewController : UIViewController,UITextViewDelegate
     var window: UIWindow?
     var ref : DatabaseReference!
     var postId : String = ""
+    var commentId : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.ref = Database.database().reference()
         self.commentTextView.delegate = self
-        if postId != ""{
-            _ = self.ref.child("comments").queryOrdered(byChild: "postId").queryEqual(toValue: self.postId).observe(.childAdded, with: { (snapshot) in
+        if commentId != ""{
+            _ = self.ref.child("comments").queryOrdered(byChild: "commentId").queryEqual(toValue: self.commentId).observe(.childAdded, with: { (snapshot) in
                 guard snapshot.exists() else{
                     print ("There is no Rooooooooooooow")
                     return
@@ -30,11 +32,10 @@ class CommentViewController : UIViewController,UITextViewDelegate
     @IBAction func btnSaveComment(_ sender: Any) {
         let userComment = self.commentTextView.text
         self.ref = Database.database().reference()
-        if self.postId != "" {
-            let postRef = self.ref.child("comments").child(self.postId)
+        if self.commentId != "" {
+            let postRef = self.ref.child("comments").child(self.commentId)
             let post = ["message":userComment]
-            let childUpdates = ["/comments/\(self.postId)/":post]
-            postRef.updateChildValues(childUpdates)
+            postRef.updateChildValues(post)
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
@@ -42,12 +43,13 @@ class CommentViewController : UIViewController,UITextViewDelegate
             self.window?.makeKeyAndVisible()
         }
         
-        if userComment != nil {
+        if userComment != nil && self.commentId == "" {
             let commentId = self.ref.child("comments").childByAutoId().key
             let userId = Auth.auth().currentUser?.uid
             self.ref.child("comments").child(commentId).child("userId").setValue(userId)
             self.ref.child("comments").child(commentId).child("message").setValue(userComment)
             self.ref.child("comments").child(commentId).child("postId").setValue(postId)
+            self.ref.child("comments").child(commentId).child("commentId").setValue(commentId)
             self.ref.child("comments").child(commentId).child("isPublic").setValue(true)
         self.ref.child("comments").child(commentId).child("Date").setValue(ServerValue.timestamp())
             let notificationId = self.ref.child("notifications").childByAutoId().key
