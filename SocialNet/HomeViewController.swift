@@ -66,13 +66,21 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil {
                     self.userId = auth.currentUser?.uid
-                    if let photoURL = auth.currentUser?.photoURL{
-                        let data = NSData(contentsOf: photoURL)
-                        cell.userProfileViewImage.image = UIImage(data: data! as Data)
-                    }
-                    else{
-                        cell.userProfileViewImage.image = UIImage(named:"DefaultProfile")
-                    }
+                    let imagesRef = self.storageRef.child("images/"+self.userId + "/ProfileImage.jpg")
+                    imagesRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                        if error == nil{
+                            cell.userProfileViewImage.image = UIImage(data: data! as Data)
+                        }
+                        else{
+                            if let photoURL = auth.currentUser?.photoURL{
+                                let data = NSData(contentsOf: photoURL)
+                                cell.userProfileViewImage.image = UIImage(data: data! as Data)
+                            }
+                            else{
+                                cell.userProfileViewImage.image = UIImage(named:"DefaultProfile")
+                            }
+                        }
+                    })
                     cell.userPostLabel.text = self.postsList[_indexDatabase]?["message"] as! String?
                     cell.userPostLabel.numberOfLines = 0
                 }
