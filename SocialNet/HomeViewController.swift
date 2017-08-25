@@ -164,9 +164,12 @@ class HomeViewController:UITableViewController,UIImagePickerControllerDelegate,U
                     let postId = self.postsList[(_indexPath.row-2)]?["postId"] as? String
                     //print("PostttttttId",postId)
                     self.ref.child("posts").child(postId!).removeValue{error in
-                        tableView.reloadData()                    }
+                        
+                   }
                     self.ref.child("notifications").child(postId!).removeValue()
-                    tableView.reloadData()
+                    self.countOfPostCell -= 1
+                    //tableView.deleteRows(at: [indexPath], with: .automatic)
+                    
                 }
             }
             
