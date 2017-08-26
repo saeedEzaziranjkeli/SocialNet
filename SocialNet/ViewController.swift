@@ -16,6 +16,19 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
+        let defaultvalue : [String:Any] = [
+            "Email" : "",
+            "Password": ""
+        ]
+        UserDefaults.standard.register(defaults: defaultvalue)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let userDefaults = UserDefaults.standard
+        let email = userDefaults.string(forKey: "email_preference")
+        let password = userDefaults.string(forKey: "password_preference")
+        print("555555555",email,"55555555",password)
     }
     
 

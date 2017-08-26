@@ -21,6 +21,7 @@
 		483E018A1F48546400619833 /* ContentFittingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483E01891F48546400619833 /* ContentFittingTableView.swift */; };
 		484593011F460A660032505A /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484593001F460A660032505A /* CommentViewController.swift */; };
 		484593031F461CDF0032505A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484593021F461CDF0032505A /* SearchViewController.swift */; };
+		484E362F1F51CE72008C4DFD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 484E362E1F51CE72008C4DFD /* Settings.bundle */; };
 		486BFFE31F25334B0059BFD8 /* PostEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486BFFE21F25334B0059BFD8 /* PostEditorViewController.swift */; };
 		486DB33C1F1FFA7F00242D25 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */; };
 		4888A9C01F24A7EF00587A86 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */; };
@@ -51,6 +52,7 @@
 		483E01891F48546400619833 /* ContentFittingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentFittingTableView.swift; sourceTree = "<group>"; };
 		484593001F460A660032505A /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		484593021F461CDF0032505A /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		484E362E1F51CE72008C4DFD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		486BFFE21F25334B0059BFD8 /* PostEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEditorViewController.swift; sourceTree = "<group>"; };
 		486DB33B1F1FFA7F00242D25 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4888A9BF1F24A7EF00587A86 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		482625521F1D334E006315E0 = {
 			isa = PBXGroup;
 			children = (
+				484E362E1F51CE72008C4DFD /* Settings.bundle */,
 				4826255D1F1D334E006315E0 /* SocialNet */,
 				4826255C1F1D334E006315E0 /* Products */,
 				8118E27F56DD525F35D5B57C /* Pods */,
@@ -206,6 +209,7 @@
 				482625711F1D33DE006315E0 /* GoogleService-Info.plist in Resources */,
 				4888A9CA1F24C97000587A86 /* HomeTableViewCellSlider.xib in Resources */,
 				482625661F1D334E006315E0 /* Assets.xcassets in Resources */,
+				484E362F1F51CE72008C4DFD /* Settings.bundle in Resources */,
 				482625641F1D334E006315E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
