@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class NotificationViewController:UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class NotificationViewController:UITableViewController{
     
     var userId:String!
     @IBOutlet var NotificationsTableView: UITableView!
@@ -34,17 +34,17 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath)
-//        print("44444444",cell.imageView?.frame)
-//        cell.imageView?.layer.borderWidth = 2
-//        cell.imageView?.layer.borderColor = UIColor.white.cgColor
-//        cell.imageView?.layer.cornerRadius = (cell.imageView?.bounds.height)!/2
-//        cell.imageView?.layer.masksToBounds = true
             Auth.auth().addStateDidChangeListener{(auth,user) in
                 if user != nil{
-                        let username = auth.currentUser?.displayName
-                        let photoURL = auth.currentUser?.photoURL
-                        let data = NSData(contentsOf: photoURL!)
-                        cell.imageView?.image = UIImage(data: data! as Data)
+                    let username = auth.currentUser?.displayName
+                    if let photoURL = auth.currentUser?.photoURL{
+                        //let data = NSData(contentsOf: photoURL)
+                         //cell.imageView?.image = UIImage(data: data! as Data)
+                         cell.imageView?.image = UIImage(named:"DefaultProfile")
+                    }
+                    else{
+                         cell.imageView?.image = UIImage(named:"DefaultProfile")
+                    }
                     
                     _ = self.ref.child("notifications").queryOrdered(byChild: "userId").queryEqual(toValue: self.userId).observe(.childAdded, with: { (snapshot) in
                         guard snapshot.exists() else{
@@ -53,10 +53,8 @@ class NotificationViewController:UITableViewController,UIImagePickerControllerDe
                         }
                         cell.textLabel?.text = self.commentList[indexPath.row]?["status"] as! String?
                         cell.detailTextLabel?.text = username
-                        
                     })
                 }
-                //tableView.reloadData()
         }
         
             return cell

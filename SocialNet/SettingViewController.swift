@@ -32,7 +32,7 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
             return 1
         }
         else if section == 1{
-            return 2
+            return 1
         }
         else if section == 2{
             return 1
@@ -80,9 +80,6 @@ class SettingViewController:UITableViewController,UIImagePickerControllerDelegat
 
             if indexPath.item == 0 {
                 cell?.textLabel?.text = "Edit Your Account"
-                return cell!
-            }else if indexPath.item == 1 {
-                cell?.textLabel?.text = "Change Your Picture"
                 return cell!
             }
         }

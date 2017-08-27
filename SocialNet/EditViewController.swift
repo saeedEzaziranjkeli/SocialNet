@@ -16,19 +16,21 @@ class EditViewController:UIViewController,UITextFieldDelegate{
     var ref: DatabaseReference!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = Database.database().reference()
         self.usernameTextbox.delegate = self
         self.emailTextbox.delegate = self
-        Auth.auth().addStateDidChangeListener{(auth,user) in
-            if user != nil{
-                let username = auth.currentUser?.displayName
-                let email = auth.currentUser?.email
-                self.usernameTextbox.text = username
-                self.emailTextbox.text = email
-            }
-            else{
-                print("User must Signin")
-            }
-        }
+                let userId = Auth.auth().currentUser?.uid
+                _ = self.ref.child("user_profiles").child(userId!).observe(.value, with: { (snapshot) in
+                    guard snapshot.exists() else {
+                        return
+                    }
+                   let value = snapshot.value as? NSDictionary
+                    self.usernameTextbox.text = value?["username"] as? String
+                    self.emailTextbox.text = value?["email"] as? String
+                    
+                  
+                })
+    
 
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,7 +43,8 @@ class EditViewController:UIViewController,UITextFieldDelegate{
         return true
     }
     
-    @IBAction func saveButton(_ sender: Any) {
+    
+    @IBAction func saveEditButton(_ sender: Any) {
         let username = self.usernameTextbox.text
         let email = self.emailTextbox.text
         self.ref = Database.database().reference()
@@ -54,8 +57,9 @@ class EditViewController:UIViewController,UITextFieldDelegate{
         let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
-        
+
     }
+   
     
     
 }

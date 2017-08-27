@@ -6,7 +6,7 @@ class SearchViewController : UITableViewController,UISearchResultsUpdating
 {
     var window: UIWindow?
     var ref : DatabaseReference!
-    
+    var userId : String = ""
 
     @IBOutlet var searchFirendsTableView: UITableView!
     var users = [NSDictionary?]()
@@ -72,5 +72,17 @@ class SearchViewController : UITableViewController,UISearchResultsUpdating
         }
         tableView.reloadData()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = tableView.indexPathForSelectedRow{
+            let user = self.users[indexPath.row]
+            self.userId = user?["userId"] as! String
+        }
+        if segue.identifier == "showUserPageSegue"{
+            if let userVC = segue.destination as? UserViewController{
+                userVC.userId = self.userId
+            }
+        }
+    }
+    
     
 }

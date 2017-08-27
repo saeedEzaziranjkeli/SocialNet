@@ -29,7 +29,7 @@ class CommentViewController : UIViewController,UITextViewDelegate
             self.commentTextView.layer.borderColor = UIColor.black.cgColor
         }
     }
-    @IBAction func btnSaveComment(_ sender: Any) {
+    @IBAction func saveComment(_ sender: Any) {
         let userComment = self.commentTextView.text
         self.ref = Database.database().reference()
         if self.commentId != "" {
@@ -51,7 +51,7 @@ class CommentViewController : UIViewController,UITextViewDelegate
             self.ref.child("comments").child(commentId).child("postId").setValue(postId)
             self.ref.child("comments").child(commentId).child("commentId").setValue(commentId)
             self.ref.child("comments").child(commentId).child("isPublic").setValue(true)
-        self.ref.child("comments").child(commentId).child("Date").setValue(ServerValue.timestamp())
+            self.ref.child("comments").child(commentId).child("Date").setValue(ServerValue.timestamp())
             let notificationId = self.ref.child("notifications").childByAutoId().key
             self.ref.child("notifications").child(notificationId).child("userId").setValue(userId)
             self.ref.child("notifications").child(notificationId).child("postId").setValue(postId)
@@ -64,11 +64,9 @@ class CommentViewController : UIViewController,UITextViewDelegate
         let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
-
+        
     }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     

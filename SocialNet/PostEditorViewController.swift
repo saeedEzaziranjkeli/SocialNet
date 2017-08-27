@@ -48,7 +48,7 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
         return true
     }
     
-    @IBAction func btnSave(_ sender: Any) {
+    @IBAction func savePost(_ sender: Any) {
         let userPost = self.postTextView.text
         self.ref = Database.database().reference()
         
@@ -62,7 +62,7 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }
-        
+            
         else if userPost != nil {
             let postId = self.ref.child("posts").childByAutoId().key
             let userId = Auth.auth().currentUser?.uid
@@ -76,7 +76,7 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
             self.ref.child("notifications").child(notificationId).child("userId").setValue(userId)
             self.ref.child("notifications").child(notificationId).child("postId").setValue(postId)
             self.ref.child("notifications").child(notificationId).child("status").setValue("Add a new Post")
-
+            
             
         }
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -85,8 +85,5 @@ class PostEditorViewController : UIViewController,UITextViewDelegate
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
     }
-    
-    
-
     
 }

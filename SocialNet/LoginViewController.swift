@@ -28,7 +28,7 @@ class LoginViewController:UIViewController,UITextFieldDelegate{
         return true
     }
     
-    @IBAction func btnLogin(_ sender: Any) {
+    @IBAction func loginUserButton(_ sender: Any) {
         let userEmail = userEmailText?.text
         let userPassword = userPasswordtext?.text
         if userEmail == "" || userPassword == ""{

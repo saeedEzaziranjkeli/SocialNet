@@ -20,7 +20,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        
+//        let defaultvalue : [String:Any] = [
+//            "Email" : "",
+//            "Password": ""
+//        ]
+//        UserDefaults.standard.register(defaults: defaultvalue)
+//        let userDefaults = UserDefaults.standard
+//        let email = userDefaults.string(forKey: "email_preference")
+//        let password = userDefaults.string(forKey: "password_preference")
+//        if email != "" && password != "" {
+//            Auth.auth().signIn(withEmail:email!, password: password!) { (user, error) in
+//                if error != nil {
+//                    self.window = UIWindow(frame: UIScreen.main.bounds)
+//                    
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTB")
+//                    
+//                    self.window?.rootViewController = initialViewController
+//                    self.window?.makeKeyAndVisible()
+//                }else{
+//                    
+//                }
+//            }
+//
+//        }
         Auth.auth().addStateDidChangeListener{(auth,user) in
             if user != nil{
                 self.window = UIWindow(frame: UIScreen.main.bounds)

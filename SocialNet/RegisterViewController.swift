@@ -37,8 +37,9 @@ class RegisterViewController:UIViewController,UITextFieldDelegate{
         userConfirmPasswordText.resignFirstResponder()
         return true
     }
-
-    @IBAction func registerUser(_ sender: Any) {
+    
+    
+    @IBAction func registerUserButton(_ sender: Any) {
         let userEmail = userEmailText?.text
         let userPassword = userPasswordtext?.text
         let userConfirmPassword = userConfirmPasswordText?.text
@@ -54,8 +55,8 @@ class RegisterViewController:UIViewController,UITextFieldDelegate{
             alertController.addAction(defaultAction)
             present(alertController, animated: true, completion: nil)
         }
-
-             else{
+            
+        else{
             Auth.auth().createUser(withEmail: userEmail!, password: userPassword!, completion: { (user, error) in
                 if error != nil{
                     print("Error")
@@ -73,6 +74,7 @@ class RegisterViewController:UIViewController,UITextFieldDelegate{
                             let userRefrence = self.ref.child("user_profiles").childByAutoId();
                             userRefrence.child("email").setValue(userEmail)
                             userRefrence.child("name").setValue(userEmail)
+                            userRefrence.child("userId").setValue(userRefrence)
                             userRefrence.child("password").setValue(userPassword)
                             self.window = UIWindow(frame: UIScreen.main.bounds)
                             
@@ -86,12 +88,11 @@ class RegisterViewController:UIViewController,UITextFieldDelegate{
                         else{
                             print("Moshkel dare")
                         }
-
-                    
+                        
+                        
                     })
                 }
             })
         }
     }
-    
 }
